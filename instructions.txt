@@ -1,18 +1,54 @@
+## Creazione Repository locale ##
 mkdir Repository
 cd Repository
 git init
 git remote add Repo https://github.com/MoraGames/Repository.git
 
+## Scrittura del codice ##
 ... code di index.php e data.json ...
 php index.php
 
+## Sincronizzazione Repository Locale -> Remota ##
 git add .
 git commit -m "First commit."
 git push Repo master
 
+## For Esposizione del servizio ##
 ...
 aprire gitpod.io
 nuovo progetto -> selezionate la repository di github -> nuovo workspace
 selezionare il branch corretto
 ...
 
+## For testing purposes ##
+php index.php
+php -S localhost:8080
+
+...
+new folder "site"
+move the data.json and index.php into site folder
+new Dockerfile file
+write in Dockerfile:
+    FROM (Recupera l'immagine di apache)
+    COPY (Copia i tuoi file della cartella nella "htdocs" del container apache)
+    RUN (Fornisci tutti i permessi possibili per il file data.json)
+    EXPOSE (Esponi il docker su una porta)
+
+## Build the Docker container ##
+docker build -t site site/
+
+## Run and Stop the Docker
+docker run -d site
+docker stop exciting_mccarthy
+
+## Run and Stop the Docker as a Service
+docker run -p 8080:80 site
+docker stop exciting_mccarthy
+
+## Run and Stop the Docker as a Service and Demon
+docker run -dp 8080:80 site
+docker stop exciting_mccarthy
+
+## Remove and Rebuild the Docker container ##
+docker rm exciting_mccarthy
+docker build -t site site/
