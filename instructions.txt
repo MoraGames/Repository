@@ -9,3 +9,10 @@ php index.php
 git add .
 git commit -m "First commit."
 git push Repo master
+
+...
+aprire gitpod.io
+nuovo progetto -> selezionate la repository di github -> nuovo workspace
+selezionare il branch corretto
+...
+
