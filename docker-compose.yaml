@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:80
-    volumes:
-      - ./site:/var/www/html/
   site2:
     container_name: site2
     build:
@@ -16,16 +14,24 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:80
-    volumes:
-      - ./site:/var/www/html/
-  nginx:
-    build:
-      context: nginx/
+  # nginx:
+  #   build:
+  #     context: nginx/
+  #   ports:
+  #     - 8000:80
+  #   depends_on:
+  #     - site
+  #     - site2
+  database:
+    image: mariadb:10.2
+    environment:
+      MYSQL_USER: MoraGames
+      MYSQL_PASSWORD: MoraGames
+      MYSQL_ROOT_PASSWORD: rootPassword
     ports:
-      - 8000:80
-    depends_on:
-      - site
-      - site2
+      - 8001:80
+    volumes:
+      - ./database:/var/lib/mysql
     
 volumes:
-  site:
+  database:
