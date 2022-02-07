@@ -14,14 +14,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:80
-  # nginx:
-  #   build:
-  #     context: nginx/
-  #   ports:
-  #     - 8000:80
-  #   depends_on:
-  #     - site
-  #     - site2
+  nginx:
+    build:
+      context: nginx/
+    ports:
+      - 8000:80
+    depends_on:
+      - site
+      - site2
   database:
     image: mariadb:10.2
     environment:
